@@ -1,0 +1,15 @@
+// Basic - static-singleValue.stencil Template
+// swiftlint:disable all
+// Generated using SwiftTokenGen — https://github.com/chrishoste/SwiftTokenGen
+
+import Foundation
+
+public enum {{ params.objectName }} { {% for input in inputs %}
+    public enum {{ input.params.objectName }} { {% for value in input.values %}
+        public static let {{ value.name }} = {{ value.entry.value }}
+    {%- endfor %}
+    }
+{%- endfor %}
+}
+
+// swiftlint:enable all

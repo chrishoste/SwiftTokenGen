@@ -1,0 +1,23 @@
+// Basic - static-typography.stencil Template
+// swiftlint:disable all
+// Generated using SwiftTokenGen — https://github.com/chrishoste/SwiftTokenGen
+
+import Foundation
+
+public struct {{ params.objectName }} {
+    var fontSize: Int
+    var fontFamily: String
+    var fontWeight: Int
+    var fontStyle: String
+    var lineHeight: Float
+}
+
+public extension {{ params.objectName }} { {% for input in inputs %}
+    enum {{ input.params.objectName }} { {% for value in input.values %}
+        public static let {{ value.name }} = {{ params.objectName }}(fontSize: {{ value.entry.value.fontSize }}, fontFamily: "{{ value.entry.value.fontFamily }}", fontWeight: {{ value.entry.value.fontWeight }}, fontStyle: "{{ value.entry.value.fontStyle }}", lineHeight: {{ value.entry.value.lineHeight }})
+    {%- endfor %}
+    }
+{%- endfor %}
+}
+
+// swiftlint:enable all

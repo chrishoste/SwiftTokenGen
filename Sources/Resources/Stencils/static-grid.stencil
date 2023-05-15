@@ -1,0 +1,23 @@
+// Basic - static-grid.stencil Template
+// swiftlint:disable all
+// Generated using SwiftTokenGen — https://github.com/chrishoste/SwiftTokenGen
+
+import Foundation
+
+public struct {{ params.objectName }} {
+    var pattern: String
+    var gutterSize: Int
+    var alignment: String
+    var count: Int
+    var offset: Int
+}
+
+public extension {{ params.objectName }} { {% for input in inputs %}
+    enum {{ input.params.objectName }} { {% for value in input.values %}
+        public static let {{ value.name }} = {{ params.objectName }}(pattern: {{ value.entry.value.pattern }}, gutterSize: "{{ value.entry.value.gutterSize }}", alignment: {{ value.entry.value.alignment }}, count: "{{ value.entry.value.count }}", offset: {{ value.entry.value.offset }})
+    {%- endfor %}
+    }
+{%- endfor %}
+}
+
+// swiftlint:enable all

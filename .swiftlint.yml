@@ -1,0 +1,16 @@
+included:
+  - Sources
+  - Tests
+
+line_length: 
+  warning: 125
+  ignores_comments: true
+  ignores_interpolated_strings: true
+
+identifier_name:
+  min_length: 2
+
+type_name:
+    min_length: 1
+
+reporter: "xcode"
