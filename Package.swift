@@ -4,9 +4,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftTokenGen",
-    platforms: [
+    name: "SwiftTokenGen",    platforms: [
       .macOS(.v13)
+    ],
+    products: [
+        .executable(name: "swift-token-gen", targets: ["SwiftTokenGen"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.

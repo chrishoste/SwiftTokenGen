@@ -6,7 +6,7 @@ struct SwiftTokenGen: ParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "swift-token-gen",
         abstract: "A utility for generating code.",
-        version: "0.1.0",
+        version: "0.2.0",
         subcommands: [
             Commands.Templates.self,
             Commands.Config.self
