@@ -1,0 +1,40 @@
+{
+  "colors": [
+    {%- if color.dark %}
+    {
+      "color": {
+        "color-space": "srgb",
+        "components": {
+          "red": "{{color.dark.rgba.red}}",
+          "green": "{{color.dark.rgba.green}}",
+          "blue": "{{color.dark.rgba.blue}}",
+          "alpha": "{{color.dark.rgba.alpha}}"
+        }
+      },
+      "idiom": "universal",
+      "appearances": [
+        {
+          "appearance": "luminosity",
+          "value": "dark"
+        }
+      ]
+    },
+    {%- endif %}
+    {
+      "color": {
+        "color-space": "srgb",
+        "components": {
+          "red": "{{color.any.rgba.red}}",
+          "green": "{{color.any.rgba.green}}",
+          "blue": "{{color.any.rgba.blue}}",
+          "alpha": "{{color.any.rgba.alpha}}"
+        }
+      },
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

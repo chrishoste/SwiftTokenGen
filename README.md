@@ -6,6 +6,8 @@
 # SwiftTokenGen
 Effortlessly generate code from DesignTokens. Decode Figma exports or Amazon Style Dictionary JSON. Seamlessly populate stencil templates for enhanced development. Simplify development with SwiftTokenGen.
 
+> This open-source project is currently in its early stage, and while it does work, it still requires a lot of love and work to reach its full potential. I encourage you to provide feedback, suggest new features, or contribute to the project. I value open discussions and I am excited to collaborate with you. Feel free to explore and experiment!
+
 # ⚙️ Installation
 To install the `swift-token-gen` tool for your open-source project, you have two options:
 

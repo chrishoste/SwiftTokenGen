@@ -10,10 +10,12 @@ struct Template {
     /// - Parameters:
     ///   - fileManager: The file manager to use for reading and writing files. Defaults to the default file manager.
     ///   - environment: The Stencil environment to use for rendering templates. Defaults to a new instance of `Environment`.
-    init(fileManager: FileManager = .default,
-         environment: Environment = .init()) {
+    init(fileManager: FileManager = .default) {
+        let ext = Extension()
+        ext.registerFilter("quote", filter: QuoteFilter.filter)
+        
         self.fileManager = fileManager
-        self.environment = environment
+        self.environment = Environment(extensions: [ext])
     }
 
     /// Renders a template with the given data and writes the output to a file.

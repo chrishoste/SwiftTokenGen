@@ -1,0 +1,17 @@
+{
+  "images": [
+    {
+      "filename": "{{ file }}",
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }{% if properties %},
+  "properties": {
+    {%- for key, value in properties %}
+      "{{ key }}": {{ value|quote }}{{ "," if not forloop.last }}
+    {%- endfor %}
+  }{%- endif %}
+}
