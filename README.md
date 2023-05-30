@@ -110,4 +110,45 @@ Enjoy using `swift-token-gen` to generate Swift code efficiently based on your c
 2. xcassets
 
 # Design Token `token.json`
-⚒️ WIP ⚒️
+Design Tokens play a crucial role in maintaining consistent and synchronized styles across various platforms and devices. They offer a platform-agnostic approach to defining fundamental visual styles. Each design token comprises attributes that describe specific visual elements like colors, fonts, and spacing.
+
+```json
+// Example Breakpoint
+"breakpoints": {
+    "xxl": {
+        "type": "dimension",
+        "value": 1792,
+         ...
+    }
+}
+
+// Example Color
+"light": {
+    "colors": {
+      "background": {
+        "type": "color",
+        "value": "#ffffffff",
+         ...
+      }
+    }
+}
+
+// Example Typography
+"typography": {
+    "largeTitle1Bold": {
+        "type": "custom-fontStyle",
+        "value": {
+            "fontSize": 114,
+            "textDecoration": "none",
+            "fontFamily": "Some Font Family",
+             ...
+        }
+    }
+}
+```
+
+The Figma Plugin called [Design Tokens](https://www.figma.com/community/plugin/888356646278934516/Design-Tokens) offers a convenient solution for exporting design tokens into the JSON format of [Amazon Style Dictionary](https://amzn.github.io/style-dictionary/#/tokens). By utilizing Design Tokens and the Amazon style dictionary, you can create and modify styles in a centralized location, ensuring consistency and minimizing errors.
+
+In summary, Design Tokens provide a standardized method for defining visual styles, and the Figma Plugin facilitates the export of these tokens, simplifying the maintenance of consistent styles across multiple platforms and enhancing collaboration in the design and development process.
+
+> ℹ️ For more information check our the [Figma Design Tokens Repo](https://github.com/lukasoppermann/design-tokens) or [Amazon Style Dictionary](https://amzn.github.io/style-dictionary/#/).
