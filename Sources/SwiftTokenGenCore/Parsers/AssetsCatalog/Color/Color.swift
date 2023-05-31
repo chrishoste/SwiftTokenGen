@@ -47,24 +47,15 @@ struct Color {
     }
 }
 
-// MARK: - Private Extensions
+// MARK: - Error
 
-private extension Color {
-    /// Errors that can occur during color initialization.
-    enum ColorError: Error, LocalizedError {
-        case missingAnyColor
-        
-        var errorDescription: String {
-            switch self {
-            case .missingAnyColor:
-                return """
-                Error: The color value for the "any" variant is missing or in the wrong format.
-                
-                Please make sure the color value is provided as a valid string in the design token.
-                Refer to the documentation for more information:
-                [README.md](https://github.com/chrishoste/SwiftTokenGen/blob/main/README.md)
-                """
-            }
+/// Errors that can occur during color initialization.
+enum ColorError: Error, LocalizedError {
+    case missingAnyColor
+    
+    var errorDescription: String {
+        switch self {
+        case .missingAnyColor: return L10n.Error.missingAnyColor
         }
     }
 }

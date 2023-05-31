@@ -1,0 +1,145 @@
+{
+  "breakpoints": {
+    "xxl": {
+      "description": null,
+      "value": 1792,
+      "type": "dimension"
+    },
+    "xl": {
+      "description": null,
+      "value": 1280,
+      "type": "dimension"
+    },
+    "lg": {
+      "description": null,
+      "value": 1024,
+      "type": "dimension"
+    },
+    "md": {
+      "description": null,
+      "value": 768,
+      "type": "dimension"
+    },
+    "sm": {
+      "description": null,
+      "value": 568,
+      "type": "dimension"
+    },
+    "xs": {
+      "description": null,
+      "value": 360,
+      "type": "dimension"
+    },
+    "xxs": {
+      "description": null,
+      "value": 0,
+      "type": "dimension"    }
+  },
+  "grid": {
+    "xxs": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 8,
+        "alignment": "stretch",
+        "count": 6,
+        "offset": 16
+      }
+    },
+    "xs": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 12,
+        "alignment": "stretch",
+        "count": 6,
+        "offset": 24
+      }
+    },
+    "sm": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 16,
+        "alignment": "stretch",
+        "count": 12,
+        "offset": 32
+      }
+    },
+    "md": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 24,
+        "alignment": "stretch",
+        "count": 12,
+        "offset": 48
+      }
+    },
+    "lg": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 32,
+        "alignment": "stretch",
+        "count": 12,
+        "offset": 64
+      }
+    },
+    "xl": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 48,
+        "alignment": "stretch",
+        "count": 12,
+        "offset": 96
+      }
+    },
+    "xxl": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 48,
+        "alignment": "stretch",
+        "count": 12,
+        "offset": 0
+      }
+    },
+    "tv": {
+      "description": null,
+      "type": "custom-grid",
+      "value": {
+        "pattern": "columns",
+        "gutterSize": 48,
+        "alignment": "stretch",
+        "count": 12,
+        "offset": 160
+      }
+    }
+  },
+  "dark": {
+    "colors": {
+      "onBackground": {
+        "highEmphasis": {
+          "description": "",
+          "type": "color",
+          "value": "#f7f8f9ff"
+        },
+        "mediumEmphasis": {
+          "description": "",
+          "type": "color",
+          "value": "#afb0b6ff",
+          "blendMode": "normal"
+        }
+      }
+    }
+  }
+}

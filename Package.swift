@@ -42,6 +42,10 @@ let package = Package(
         ),
         .testTarget(name: "SwiftTokenGenCoreTest",
                     dependencies: ["SwiftTokenGenCore"],
-                    path: "Tests")
+                    path: "Tests",
+                    resources: [
+                        .process("Resources")
+                    ]
+        )
     ]
 )

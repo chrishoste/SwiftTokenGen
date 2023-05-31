@@ -42,6 +42,7 @@ private extension Array where Element == DesignToken.Value {
 
                 return compare(leftValue, rhs: rightValue)
             default:
+                guard !equal(lhs.entry.value, rhs: rhs.entry.value) else { return lhs.name < rhs.name }
                 return compare(lhs.entry.value, rhs: rhs.entry.value)
             }
         }

@@ -20,7 +20,8 @@ extension Commands.Config {
          - Throws: An error if the file cannot be loaded or parsed.
          */
         func load() throws -> [Config] {
-            try configs.map { try .init(path: $0) }
+            let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+            return try configs.map { try .init(path: pwd.appendingPathComponent($0).path) }
         }
     }
 
@@ -41,7 +42,8 @@ extension Commands.Config {
          - Throws: An error if the file cannot be loaded or parsed.
          */
         func load() throws -> DesignToken {
-            try .init(path: file)
+            let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+            return try .init(path: pwd.appendingPathComponent(file).path)
         }
     }
 }

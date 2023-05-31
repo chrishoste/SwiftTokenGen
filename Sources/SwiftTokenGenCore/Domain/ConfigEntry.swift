@@ -16,7 +16,7 @@ struct ConfigEntry {
         }
 
         guard let option = dictionary[key.rawValue] as? T else {
-            fatalError(key.errorMessage)
+            throw NSError(domain: key.errorMessage, code: 0)
         }
 
         return option
@@ -45,7 +45,7 @@ extension ConfigEntry.Key {
 }
 
 // An enumeration that represents an error encountered when parsing a configuration entry
-private enum ConfigEntryError: Error, LocalizedError {
+enum ConfigEntryError: Error, LocalizedError {
     case failedToCastToDictionary
 
     var errorDescription: String {

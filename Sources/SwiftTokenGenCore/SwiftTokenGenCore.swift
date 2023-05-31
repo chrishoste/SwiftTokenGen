@@ -1,7 +1,6 @@
 import Foundation
 
 public enum SwiftTokenGenCore {
-    
     static let allParser = [
         AssetsCatalog.Parser.self.info,
         Files.Parser.self.info
@@ -18,19 +17,6 @@ public enum SwiftTokenGenCore {
                 let parser = try info.parseableType.init(config: value, token: designToken)
                 try parser.parse()
             }
-        }
-    }
-    
-    
-    
-    public static func list() {
-        guard let templates = Bundle.module.urls(forResourcesWithExtension: "stencil", subdirectory: nil) else {
-            return
-        }
-
-        print("\n List of available templates: \n")
-        for url in templates {
-            print("    • \(url.lastPathComponent) - TODO<README>")
         }
     }
 }

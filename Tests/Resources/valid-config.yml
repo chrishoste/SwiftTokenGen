@@ -1,0 +1,13 @@
+files: 
+  - output:
+      template: static-single-value
+      output: Generated/DesignTokenBreakpoints.swift
+      params:
+        objectName: "DesignTokenBreakpoints"
+    inputs: 
+      - keys: [breakpoints]
+        keysAsNamePrefix: true
+        process:
+          sortBy: value
+        params:
+          objectName: Breakpoints

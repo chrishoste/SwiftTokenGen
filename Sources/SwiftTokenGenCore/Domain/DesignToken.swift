@@ -10,14 +10,11 @@ public struct DesignToken {
     - Throws: `DesignTokenError.missingToken` if the token file doesn't exist.
     */
     public init(path: String) throws {
-        let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        let tokenPath = pwd.appendingPathComponent(path)
-
-        guard FileManager.default.fileExists(atPath: tokenPath.path) else {
+        guard FileManager.default.fileExists(atPath: path) else {
             throw DesignTokenError.missingToken
         }
 
-        self.values = try Decoder.json(fromPath: tokenPath.path)
+        self.values = try Decoder.json(fromPath: path)
     }
 
     /**
@@ -69,6 +66,28 @@ private extension DesignToken {
 
 private extension DesignToken {
     /**
+     Retrieves a sub-token from a dictionary of values based on the given keys.
+     - Parameters:
+        - keys: An array of strings representing the keys to navigate the dictionary.
+     - Returns: A dictionary containing the sub-token retrieved.
+     - Throws: A `DesignTokenError` if the sub-token retrieval fails.
+     */
+    func subToken(for keys: [String]) throws -> [String: Any] {
+        var currentDict = values
+
+        for key in keys {
+            // Check if the current value is a nested dictionary
+            guard let nestedDict = currentDict[key] as? [String: Any] else {
+                throw DesignTokenError.failedToSubtoken(keys: keys)
+            }
+
+            currentDict = nestedDict
+        }
+
+        return currentDict
+    }
+    
+    /**
      Extracts the values from the given dictionary.
      - Parameters:
         - dict: The dictionary to extract values from.
@@ -92,59 +111,18 @@ private extension DesignToken {
 
         return values
     }
-
-    /**
-     Retrieves a sub-token from a dictionary of values based on the given keys.
-     - Parameters:
-        - keys: An array of strings representing the keys to navigate the dictionary.
-     - Returns: A dictionary containing the sub-token retrieved.
-     - Throws: A `DesignTokenError` if the sub-token retrieval fails.
-     */
-    func subToken(for keys: [String]) throws -> [String: Any] {
-        var currentDict = values
-
-        for key in keys {
-            // Check if the current value is a nested dictionary
-            guard let nestedDict = currentDict[key] as? [String: Any] else {
-                throw DesignTokenError.failedToSubtoken(keys: keys)
-            }
-
-            currentDict = nestedDict
-        }
-
-        return currentDict
-    }
 }
 
-private enum DesignTokenError: Error, LocalizedError {
+enum DesignTokenError: Error, LocalizedError, Equatable {
     case missingToken
     case failedToSubtoken(keys: [String])
 
     var errorDescription: String {
         switch self {
         case .missingToken:
-            return """
-            Error: Missing Style Dictionary or Design Token
-
-            No style dictionary or design token was provided.
-
-            To provide the style dictionary or design token, use one of the following options:
-
-            Option 1: Command-line argument
-            Use the '-t <token path>' or '-token <token path>' flag to specify the path to the token file.
-
-            Example: SwiftTokenGen -t <token path>
-
-            Option 2: File placement
-            Put your token file named 'token.json' into the folder where you are running the code generation.
-
-            Make sure to provide a valid JSON file containing the style dictionary or design token.
-
-            For more information take a look at the documententation.
-            (README.md)[https://github.com/chrishoste/SwiftTokenGen/blob/main/README.md]
-            """
+            return L10n.Error.missingToken
         case .failedToSubtoken(let keys):
-            return "Failed to retrieve subtoken for keys: \(keys)"
+            return "Failed to retrieve subtoken for keys: \(keys.joined(separator: ", "))"
         }
     }
 }

@@ -14,6 +14,8 @@ enum QuoteFilter {
      - Returns: The filtered value, converted to a quoted string if necessary.
      */
     static func filter(value: Any?, arguments: [Any?], context: Context) throws -> Any? {
+        guard let value else { return nil }
+        
         if let boolValue = value as? Bool {
             return boolValue
         }
@@ -26,6 +28,6 @@ enum QuoteFilter {
             return "\"\(strValue)\""
         }
 
-        return "\(value ?? "")"
+        return value
     }
 }

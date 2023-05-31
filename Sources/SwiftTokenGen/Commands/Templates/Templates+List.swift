@@ -11,7 +11,7 @@ extension Commands.Templates {
 
         /// Runs the command.
         func run() throws {
-            SwiftTokenGenCore.list()
+            // WIP
         }
     }
 }
