@@ -4,7 +4,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftTokenGen",    platforms: [
+    name: "SwiftTokenGen",
+    platforms: [
       .macOS(.v13)
     ],
     products: [
@@ -25,17 +26,22 @@ let package = Package(
             name: "SwiftTokenGen",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                "SwiftTokenGenCore"
+            ]
+        ),
+        .target(
+            name: "SwiftTokenGenCore",
+            dependencies: [
                 "Yams",
                 "Stencil",
                 "AnyCodable"
             ],
-            path: "Sources",
             resources: [
                 .process("Resources")
             ]
         ),
-        .testTarget(name: "SwiftTokenGenTest",
-                    dependencies: ["SwiftTokenGen"],
+        .testTarget(name: "SwiftTokenGenCoreTest",
+                    dependencies: ["SwiftTokenGenCore"],
                     path: "Tests")
     ]
 )

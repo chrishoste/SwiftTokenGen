@@ -1,5 +1,6 @@
 import ArgumentParser
 import Foundation
+import SwiftTokenGenCore
 
 extension Commands.Templates {
     struct List: ParsableCommand {
@@ -10,14 +11,7 @@ extension Commands.Templates {
 
         /// Runs the command.
         func run() throws {
-            guard let templates = Bundle.module.urls(forResourcesWithExtension: "stencil", subdirectory: nil) else {
-                return
-            }
-            
-            print("\n List of available templates: \n")
-            for url in templates {
-                print("    • \(url.lastPathComponent) - TODO<README>")
-            }
+            SwiftTokenGenCore.list()
         }
     }
 }

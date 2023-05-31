@@ -1,5 +1,6 @@
 import Foundation
 import ArgumentParser
+import SwiftTokenGenCore
 
 extension Commands.Config {
     /// A group of options related to the configuration file.

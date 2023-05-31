@@ -9,8 +9,4 @@ extension URL {
             .joined(separator: " ")
             .camelCase
     }
-    
-    var fileName: String {
-        self.camelCaseFileName
-    }
 }

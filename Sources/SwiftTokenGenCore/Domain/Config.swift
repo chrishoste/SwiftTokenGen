@@ -1,7 +1,7 @@
 import Foundation
 import Yams
 
-struct Config {
+public struct Config {
     let values: [String: Any]
 
     /**
@@ -12,7 +12,7 @@ struct Config {
      - Parameter path: The path to the YAML file.
      - Throws: An error if there is a problem reading or parsing the YAML file.
      */
-    init(path: String) throws {
+    public init(path: String) throws {
         let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
         let configPath = pwd.appendingPathComponent(path)
 

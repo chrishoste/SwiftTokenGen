@@ -1,5 +1,5 @@
 import XCTest
-@testable import SwiftTokenGen
+@testable import SwiftTokenGenCore
 
 final class StringExtensionSpec: XCTestCase {
     let camelCaseSUT: [(String, String)] = [

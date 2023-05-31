@@ -2,14 +2,14 @@ import AnyCodable
 import Foundation
 
 /// A struct representing a design token.
-struct DesignToken {
+public struct DesignToken {
     let values: [String: Any]
     /**
     Initializes a design token with the given file path.
     - Parameter path: The file path of the design token.
     - Throws: `DesignTokenError.missingToken` if the token file doesn't exist.
     */
-    init(path: String) throws {
+    public init(path: String) throws {
         let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
         let tokenPath = pwd.appendingPathComponent(path)
 

@@ -46,7 +46,7 @@ extension AssetsCatalog.Image {
                 let inputPath = pwd.appendingPathComponent(input)
                 
                 let urls = try FileManager.default.contentsOfDirectory(at: inputPath, includingPropertiesForKeys: nil)
-                let images = urls.map { Image(name: $0.fileName, any: $0) }
+                let images = urls.map { Image(name: $0.camelCaseFileName, any: $0) }
                 let processedImage = processor.process(images, options: options)
                 
                 try createAssetCatalog(images: processedImage, outputPath: outputPath, options: options)
