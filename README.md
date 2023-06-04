@@ -105,9 +105,48 @@ swift-token-gen --config swift-token-gen.yml --token token.json
 Enjoy using `swift-token-gen` to generate Swift code efficiently based on your configuration files and tokens!
 
 # Configuration `swift-token-gen.yml` & examples
-⚒️ WIP ⚒️
-1. files
-2. xcassets
+
+To configure `swift-token-gen`, you can create a configuration file that allows you to parse either a file and/or an xcasset. Please note that the current support for xcassets is quite basic, only supporting universal images with a single image per imageset. However, colors, on the other hand, can be used with any color and also support dark mode. Below are some minimal configuration examples. For more detailed information, please refer to the dedicated markdown linked.
+
+## Files (🔗[files.md](Docs/files.md))
+Here is a minimal YAML configuration example for generating a file using the preconfigured `static-single-value` template. To understand the keys and values used, please refer to the [files.md](Docs/files.md) documentation.
+
+```yaml
+files: 
+  - output:
+      template: static-single-value
+      output: Generated/DesignTokenBreakpoints.swift
+      params:
+        objectName: "DesignTokenBreakpoints"
+    inputs: 
+      - keys: [breakpoints]
+        params:
+          objectName: Breakpoints
+```
+## xcassets
+### Colorset (🔗[colorset.md](Docs/colorset.md))
+The following YAML configuration shows a minimal example for generating a colorset. For more information about the keys and values, please consult the [colorset.md](Docs/colorset.md) documentation.
+
+```yaml
+xcassets: 
+  colors:
+    - output: Generated/ColorsNew.xcassets
+      input: 
+        keys: [light, colors]
+```
+### Imageset (🔗[imageset.md](Docs/imageset.md))
+The next YAML configuration demonstrates the minimal setup for generating an imageset. For more details on the keys and values used, please refer to the [imageset.md](Docs/imageset.md) documentation. It's important to note that the properties defined here will be added to the `Contents.json` file of each imageset and its optional.
+
+```yaml
+xcassets: 
+  images: 
+    - output: Generated/Icons.xcassets
+      input: Images/icons
+--------------- Optional ------------------      
+      properties:
+        preserves-vector-representation: true
+        template-rendering-intent: template
+```
 
 # Design Token `token.json`
 Design Tokens play a crucial role in maintaining consistent and synchronized styles across various platforms and devices. They offer a platform-agnostic approach to defining fundamental visual styles. Each design token comprises attributes that describe specific visual elements like colors, fonts, and spacing.
@@ -152,3 +191,6 @@ The Figma Plugin called [Design Tokens](https://www.figma.com/community/plugin/8
 In summary, Design Tokens provide a standardized method for defining visual styles, and the Figma Plugin facilitates the export of these tokens, simplifying the maintenance of consistent styles across multiple platforms and enhancing collaboration in the design and development process.
 
 > ℹ️ For more information check our the [Figma Design Tokens Repo](https://github.com/lukasoppermann/design-tokens) or [Amazon Style Dictionary](https://amzn.github.io/style-dictionary/#/).
+
+# Licence
+This code and tool is under the MIT Licence. See the `LICENCE` file in this repository.
