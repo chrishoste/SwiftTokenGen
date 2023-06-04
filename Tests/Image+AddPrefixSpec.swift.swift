@@ -4,9 +4,9 @@ import XCTest
 class AssetsCatalogImageAddPrefixTests: XCTestCase {
     func testAssetsCatalogImageAddPrefix() {
         let colors: [Image] = [
-            .init(name: "lock", any: URL(filePath: "lock.svg")),
-            .init(name: "profile", any: URL(filePath: "profile.svg")),
-            .init(name: "settings", any: URL(filePath: "settings.svg"))
+            .init(name: "lock", any: URL(filePath: "lock.svg"), dark: nil),
+            .init(name: "profile", any: URL(filePath: "profile.svg"), dark: nil),
+            .init(name: "settings", any: URL(filePath: "settings.svg"), dark: nil)
         ]
         
         let optionsWithPrefix = ["addPrefix": "prefix"]

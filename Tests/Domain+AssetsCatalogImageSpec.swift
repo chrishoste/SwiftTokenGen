@@ -6,7 +6,7 @@ class ImageTests: XCTestCase {
         let imageURL = URL(string: "https://example.com/image.png")!
         let imageName = "image"
         
-        let image = Image(name: imageName, any: imageURL)
+        let image = Image(name: imageName, any: imageURL, dark: nil)
         
         XCTAssertEqual(image.name, imageName)
         XCTAssertEqual(image.any, imageURL)
@@ -18,7 +18,7 @@ class ImageTests: XCTestCase {
         let imageURL = URL(string: "https://example.com/hello-world-01.svg")!
         let imageName = "helloWorld01"
         
-        let image = Image(name: imageName, any: imageURL)
+        let image = Image(name: imageName, any: imageURL, dark: nil)
         
         XCTAssertEqual(image.name, imageName)
         XCTAssertEqual(image.any, imageURL)

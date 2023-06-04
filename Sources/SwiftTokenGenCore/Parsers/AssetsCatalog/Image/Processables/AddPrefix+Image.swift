@@ -20,7 +20,8 @@ extension AssetsCatalog.Image {
             
             return processable.map { image in
                 .init(name: prefix + image.name.firstCharacterUppercased,
-                      any: image.any)
+                      any: image.any,
+                      dark: image.dark)
             }
         }
     }

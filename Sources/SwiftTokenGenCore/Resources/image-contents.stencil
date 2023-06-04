@@ -4,6 +4,18 @@
       "filename": "{{ file }}",
       "idiom": "universal"
     }
+    {%- if darkFile %},
+    {
+      "appearances": [
+        {
+          "appearance": "luminosity",
+          "value": "dark"
+        }
+      ],
+      "filename": "{{ darkFile }}",
+      "idiom": "universal"
+    }
+    {%- endif %}
   ],
   "info": {
     "author": "xcode",
