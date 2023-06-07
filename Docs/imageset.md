@@ -81,6 +81,10 @@ The `input` specifies the path to the folder of images. Keep in mind that we cur
 - `adaptive`: You have the possibility to create a image set with a image for any and dark.
     - `input`: specifies the path to the folder of images. Keep in mind that they have to be named exactly the same as the `any` input above to be able to be matched together as adaptive image.
 
+## `properties`
+
+- `properties`: These are the same porperies you should already know about in your `Contents.json` this values will just be added 1:1 like you define them here. For more information check out [apple docs](https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format/ImageSetType.html).
+
 ## `params`
 
 - `params`: Additional parameters for the input. Certain templates may require specific values defined within this section. You can also include your custom static values here.

@@ -192,5 +192,75 @@ In summary, Design Tokens provide a standardized method for defining visual styl
 
 > ℹ️ For more information check our the [Figma Design Tokens Repo](https://github.com/lukasoppermann/design-tokens) or [Amazon Style Dictionary](https://amzn.github.io/style-dictionary/#/).
 
+# Templates
+## Default Templates
+You can use some very basic and predefined templates that you can check out [here](Sources/SwiftTokenGenCore/Resources).
+
+## Create custom templates
+If you want to create your own template, you can check out the predefined template to look at the "code" [here](Sources/SwiftTokenGenCore/Resources) or go to [Kyle Stencil repositorys](https://github.com/stencilproject/Stencil) documentation.
+
+The context or object the stencil template will get passed, will vary based on the values of your token and the params in your configuration. But the goal is, to just retrive the values RAW, maybe add some post procssing depending on your config file and pass them directly to be processed in the template: 
+
+The context/object might look somithung like:
+
+```yaml
+params: # Defined values in config file. Needs to be a nested object.
+inputs:
+  - params: # Defined values in config file. Needs to be a nested object.
+      values:
+        - name: "Name of the token value"
+          entry:
+            value: "Some Value"
+        - name: "Name of the token value"
+          entry:
+            value: "Some Value2"
+        - name: "Name of the token value"
+          entry:
+            value: "Some Value3"
+```
+
+The value can be based on your token, a single value, or a nested value:
+
+```yaml
+inputs:
+      values:
+        - name: "Single String Value"
+          entry:
+            value: "SingleValue"
+```
+
+```yaml
+inputs:
+      values:
+        - name: "Single Int Value"
+          entry:
+            value: 100
+```
+
+```yaml
+inputs:
+      values:
+        - name: "Single Int Value"
+          entry:
+            value: 
+              pattern: "columns"
+              gutterSize: 8
+              alignment: "stretch"
+              count: 6
+              offset: 16
+```
+
+You can use this context/object to build your custom template. You can iterate over the arrays `inputs` and `inputs`, for example.
+
+```swift
+public enum {{ params.objectName }} { {% for input in inputs %}
+    public enum {{ input.params.objectName }} { {% for value in input.values %}
+        public static let {{ value.name }} = {{ value.entry.value }}
+    {%- endfor %}
+    }
+{%- endfor %}
+}
+```
+
 # Licence
 This code and tool is under the MIT Licence. See the `LICENCE` file in this repository.
