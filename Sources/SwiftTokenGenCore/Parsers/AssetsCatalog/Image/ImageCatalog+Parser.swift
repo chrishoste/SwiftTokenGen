@@ -117,6 +117,8 @@ private extension AssetsCatalog.Image.Parser {
                 Constants.properties: options[Constants.properties] ?? []
             ]
             
+            try FileManager.default.createDirectory(atPath: imagesetOutputPath.path, withIntermediateDirectories: true, attributes: nil)
+            
             try copyImage(imageOutputPath: imagesetOutputPath.appendingPathComponent(image.file), imageURL: image.any)
             
             if let darkURL = image.dark, let darkFile = image.darkFile {
