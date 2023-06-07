@@ -1,6 +1,6 @@
 # Configuration for files
 
-Please take note that the top-level keys, namely `output` and `inputs`, are mandatory. These keys determine the values (`inputs`) to be used for generating a specific file (`output`). Each `output` corresponds to the generation of a single file.
+Please take note that the top-level keys, namely `output` and `inputs`, are mandatory. These keys determine the values (`inputs`) to be used for generating a specific file (`output`). Each `output` corresponds to the generation of a single file. `inputs` on the other hand is an array and therefor you can define multiple inputs for one output. 
 
 ```yaml
 files: 
@@ -17,8 +17,25 @@ files:
         params:
           objectName: Breakpoints
 ```
+```yaml
+files: 
+    - output:
+      template: static-typography
+      output: Generated/DesignTokenTypographys.swift
+      params:
+        objectName: "DTFontStyle"
+    inputs: 
+      - keys: [typography, interface]
+        keysAsNamePrefix: true
+        params:
+          objectName: Interface
+      - keys: [typography, tv]
+        keysAsNamePrefix: true
+        params:
+          objectName: TV
+```
 
-It is also possible to define multiple outputs simultaneously. The `files` field accepts an array of outputs.
+It is also possible to define multiple outputs simultaneously. The `files` field accepts an array of outputs. 
 
 ```yaml
 files: 
@@ -36,7 +53,7 @@ The `output` section defines the output file settings.
 - `output *`: Specifies the path and filename for the generated output file.
 - `params`: Additional parameters for the template. Certain templates may require specific values defined within this section. You can also include your custom static values here.
 
-### Inputs
+## `inputs`
 
 The `inputs` section defines the input file settings.
 
@@ -47,3 +64,5 @@ The `inputs` section defines the input file settings.
 - `params`: Additional parameters for the input. Certain templates may require specific values defined within this section. You can also include your custom static values here.
 
 (`*`) mandatory
+
+# Examples (WIP)
