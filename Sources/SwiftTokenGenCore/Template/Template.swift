@@ -12,7 +12,11 @@ struct Template {
     ///   - environment: The Stencil environment to use for rendering templates. Defaults to a new instance of `Environment`.
     init(fileManager: FileManager = .default) {
         let ext = Extension()
-        ext.registerFilter("quote", filter: QuoteFilter.filter)
+        ext.registerFilter("quoteIfNeeded", filter: QuoteFilter.filter)
+        ext.registerFilter("lowdashIfNeeded", filter: DashIfNeeded.filter)
+        ext.registerFilter("prefixFontIfNeeded", filter: PrefixFilter.Font.filter)
+        ext.registerFilter("prefixColorIfNeeded", filter: PrefixFilter.Color.filter)
+        ext.registerFilter("prefixUIImageIfNeeded", filter: PrefixFilter.UIImage.filter)
         
         self.fileManager = fileManager
         self.environment = Environment(extensions: [ext])

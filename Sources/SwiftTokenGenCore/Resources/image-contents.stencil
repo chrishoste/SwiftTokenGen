@@ -23,7 +23,7 @@
   }{% if properties %},
   "properties": {
     {%- for key, value in properties %}
-      "{{ key }}": {{ value|quote }}{{ "," if not forloop.last }}
+      "{{ key }}": {{ value|quoteIfNeeded }}{{ "," if not forloop.last }}
     {%- endfor %}
   }{%- endif %}
 }

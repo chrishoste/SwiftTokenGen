@@ -13,6 +13,8 @@ extension AssetsCatalog.Color {
             AssetsCatalog.Color.HexToRGBA()
         ])
         
+        private let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        
         /**
          Initializes the Parser with a configuration and design token.
          
@@ -56,6 +58,7 @@ extension AssetsCatalog.Color {
                 let processedColors = processor.process(colors, options: options)
                 
                 try createAssetCatalog(config: options, colors: processedColors)
+                try createAdditionalFiles(colors: processedColors, options: options)
             }
         }
     }
@@ -122,8 +125,6 @@ private extension AssetsCatalog.Color.Parser {
        - Any errors encountered while creating the asset catalog.
      */
     func createAssetCatalog(config: [String: Any], colors: [Color]) throws {
-        let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        
         let output: String = try ConfigEntry.option(from: config, for: .output)
         let outputPath = pwd.appendingPathComponent(output)
         
@@ -145,6 +146,27 @@ private extension AssetsCatalog.Color.Parser {
             
             let colorsetOutputPath = outputPath.appendingPathComponent(color.name + Constants.colorset)
             try Template().render(data: context, with: templatePath.path, to: colorsetOutputPath.appendingPathComponent(Constants.contents).path)
+        }
+    }
+    
+    func createAdditionalFiles(colors: [Color], options: [String: Any]) throws {
+        guard let additionalFiles: [[String: Any]] = ConfigEntry.optionalOption(from: options, for: .init(rawValue: "additionalFiles")) else {
+            return
+        }
+        
+        for file in additionalFiles {
+            let output: String = try ConfigEntry.option(from: file, for: .output)
+            let template: String = try ConfigEntry.option(from: file, for: .init(rawValue: "template"))
+            
+            let outputPath = pwd.appendingPathComponent(output)
+            let templatePath = pwd.appendingPathComponent(template)
+            
+            let context = [
+                "colors": colors.sorted { $0.name < $1.name },
+                Constants.params: file[Constants.params] ?? []
+            ]
+            
+            try Template().render(data: context, with: templatePath.path, to: outputPath.path)
         }
     }
 }

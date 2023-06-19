@@ -11,6 +11,8 @@ extension AssetsCatalog.Image {
             AssetsCatalog.Image.AddSuffix()
         ])
         
+        private let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        
         /**
          Initializes an `AssetsCatalog.Image.Parser` instance with the specified configuration and optional design token.
          
@@ -37,8 +39,6 @@ extension AssetsCatalog.Image {
          */
         func parse() throws {
             try xcassets.forEach { options in
-                let pwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-                
                 let output: String = try ConfigEntry.option(from: options, for: .output)
                 let outputPath = pwd.appendingPathComponent(output)
                 
@@ -49,6 +49,7 @@ extension AssetsCatalog.Image {
                 let processedImage = processor.process(images, options: options)
                 
                 try createAssetCatalog(images: processedImage, outputPath: outputPath, options: options)
+                try createAdditionalFiles(images: processedImage, options: options)
             }
         }
     }
@@ -131,6 +132,27 @@ private extension AssetsCatalog.Image.Parser {
             }
             
             try Template().render(data: context, with: templatePath.path, to: imagesetOutputPath.appendingPathComponent(Constants.contents).path)
+        }
+    }
+    
+    func createAdditionalFiles(images: [Image], options: [String: Any]) throws {
+        guard let additionalFiles: [[String: Any]] = ConfigEntry.optionalOption(from: options, for: .init(rawValue: "additionalFiles")) else {
+            return
+        }
+        
+        for file in additionalFiles {
+            let output: String = try ConfigEntry.option(from: file, for: .output)
+            let template: String = try ConfigEntry.option(from: file, for: .init(rawValue: "template"))
+            
+            let outputPath = pwd.appendingPathComponent(output)
+            let templatePath = pwd.appendingPathComponent(template)
+            
+            let context = [
+                "images": images.sorted { $0.name < $1.name },
+                Constants.params: file[Constants.params] ?? []
+            ]
+            
+            try Template().render(data: context, with: templatePath.path, to: outputPath.path)
         }
     }
     

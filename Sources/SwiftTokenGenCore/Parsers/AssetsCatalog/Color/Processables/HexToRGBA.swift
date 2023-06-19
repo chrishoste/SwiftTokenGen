@@ -68,6 +68,35 @@ private extension AssetsCatalog.Color.HexToRGBA {
         let green = String(hexColor[hexColor.index(startIndex, offsetBy: 2)..<hexColor.index(startIndex, offsetBy: 4)])
         let blue = String(hexColor[hexColor.index(startIndex, offsetBy: 4)..<hexColor.index(startIndex, offsetBy: 6)])
         
-        return ["red": "0x" + red, "green": "0x" + green, "blue": "0x" + blue, "alpha": "1.000", "hex": hexColor]
+        return ["red": "0x" + red, "green": "0x" + green, "blue": "0x" + blue, "alpha": extractAlpha(from: hexColor), "hex": hexColor]
+    }
+    
+    func extractAlpha(from hexColor: String) -> String {
+        // Remove the '#' symbol from the hex color string
+        var hex = hexColor
+        if hex.hasPrefix("#") {
+            hex.removeFirst()
+        }
+        
+        // Check if the remaining hex string has a valid length
+        guard hex.count == 8 else {
+            return "1.000"
+        }
+        
+        // Extract the alpha component from the hex string
+        let alphaSubstring = hex.suffix(2)
+        
+        // Convert the alpha component to a decimal value
+        guard let alphaValue = UInt8(alphaSubstring, radix: 16) else {
+            return "1.000"
+        }
+        
+        // Normalize the alpha value from 0-255 to 0.000-1.000
+        let normalizedAlpha = Float(alphaValue) / 255.0
+        
+        // Format the normalized alpha value to three decimal places
+        let formattedAlpha = String(format: "%.3f", normalizedAlpha)
+        
+        return formattedAlpha
     }
 }

@@ -17,6 +17,7 @@ extension Files {
         private let token: DesignToken
 
         private let processor: Processor = .init(processables: [
+            Files.AddPrefix(),
             Files.Sort()
         ])
 
